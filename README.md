@@ -1,79 +1,38 @@
-# React + TypeScript + Vite
+# Gift & Grow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Gift & Grow is a cozy pixel-art forest dashboard for community livestreams. Gifts plant animated trees, increase the forest total, and update the recent-gift feed and top-growers leaderboard.
 
-Currently, two official plugins are available:
+Stage 1 is frontend-only and includes:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- A PixiJS forest with pine, oak, and birch trees
+- Manual gift controls for 1, 5, 10, 50, or custom tree amounts
+- Cross-tab live updates and browser persistence
+- Up to 100 representative trees while all donations remain counted
+- Forest ambience, planting chimes, mute, and volume controls
+- A full forest reset
 
-## React Compiler
+## Run locally
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm ci
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+- Live dashboard: `http://localhost:5173/`
+- Admin controls: `http://localhost:5173/admin`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Open both pages in the same browser. The current version uses `localStorage` and `BroadcastChannel`, so different devices cannot share the forest yet.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Music
 
-```
+Place the background track at `public/audio/forest-ambience.mp3`. Start it from the music-note button on the live page.
 
-## Background music
+## Deploy on Render
 
-Add your music at **`public/audio/forest-ambience.mp3`**, reload the live page, and click the music-note button in the forest's lower-left corner. It loops automatically; the expandable panel controls mute and volume for the music and planting chimes. See [audio setup](public/audio/README.md).
+Create a **Static Site** with:
+
+- Build command: `npm ci && npm run build`
+- Publish directory: `dist`
+- Rewrite: `/*` → `/index.html`
+
+Built with React, TypeScript, Vite, and PixiJS.
