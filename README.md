@@ -27,12 +27,10 @@ Open both pages in the same browser. The current version uses `localStorage` and
 
 Place the background track at `public/audio/forest-ambience.mp3`. Start it from the music-note button on the live page.
 
-## Deploy on Render
+## Deploy on Vercel
 
-Create a **Static Site** with:
+Import the repository as a Vite project. The included `vercel.json` rewrites routes such as `/admin` to the application entry point so direct visits and refreshes work.
 
-- Build command: `npm ci && npm run build`
-- Publish directory: `dist`
-- Rewrite: `/*` → `/index.html`
+Vercel automatically deploys updates after they are pushed to the connected branch.
 
 Built with React, TypeScript, Vite, and PixiJS.
